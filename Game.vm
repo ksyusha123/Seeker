@@ -17,7 +17,7 @@ pop this 4
 push pointer 0
 call Game.createWalls 1
 pop temp 0
-push constant 1
+push constant 0
 pop this 5
 push pointer 0
 return
@@ -55,7 +55,7 @@ goto WHILE_EXP0
 label WHILE_END0
 push constant 0
 return
-function Game.run 4
+function Game.run 5
 push argument 0
 pop pointer 0
 call Keyboard.readChar 0
@@ -70,12 +70,40 @@ not
 if-goto WHILE_END0
 call Keyboard.keyPressed 0
 pop local 0
-push local 0
-push constant 131
+push local 3
+push constant 1
+add
+pop local 3
+push local 3
+push constant 13
 eq
+push constant 20
+call Math.multiply 2
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
+push this 5
+push constant 1
+add
+pop this 5
+push this 5
+push this 4
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 0
+pop this 5
+label IF_FALSE1
+push constant 0
+pop local 3
+label IF_FALSE0
+push local 0
+push constant 131
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
 push this 2
 call Player.erase 1
 pop temp 0
@@ -85,13 +113,13 @@ pop temp 0
 push this 2
 call Player.draw 1
 pop temp 0
-label IF_FALSE0
+label IF_FALSE2
 push local 0
 push constant 133
 eq
-if-goto IF_TRUE1
-goto IF_FALSE1
-label IF_TRUE1
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
 push this 2
 call Player.erase 1
 pop temp 0
@@ -101,17 +129,17 @@ pop temp 0
 push this 2
 call Player.draw 1
 pop temp 0
-label IF_FALSE1
+label IF_FALSE3
 push local 1
 push constant 0
 eq
-if-goto IF_TRUE2
-goto IF_FALSE2
-label IF_TRUE2
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
 push pointer 0
 call Game.moveWalls 1
 pop temp 0
-label IF_FALSE2
+label IF_FALSE4
 push this 2
 push this 5
 push this 3
@@ -119,13 +147,13 @@ add
 pop pointer 1
 push that 0
 call Player.collides 2
-if-goto IF_TRUE3
-goto IF_FALSE3
-label IF_TRUE3
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
 push constant 0
 not
 pop local 2
-label IF_FALSE3
+label IF_FALSE5
 push local 1
 push constant 1
 add
@@ -133,12 +161,12 @@ pop local 1
 push local 1
 push constant 20
 eq
-if-goto IF_TRUE4
-goto IF_FALSE4
-label IF_TRUE4
+if-goto IF_TRUE6
+goto IF_FALSE6
+label IF_TRUE6
 push constant 0
 pop local 1
-label IF_FALSE4
+label IF_FALSE6
 push constant 20
 call Sys.wait 1
 pop temp 0

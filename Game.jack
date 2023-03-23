@@ -13,7 +13,7 @@ class Game {
         let player = Player.new(1, height / 2);
         let wallsCount = 3;
         do createWalls();
-        let closestWallIndex = 1;
+        let closestWallIndex = 0;
         return this;
     }
 
@@ -32,6 +32,8 @@ class Game {
         var int lag;
         var boolean exit;
 
+        var int ticks;
+
         var Wall wall;
 
         let key = Keyboard.readChar();
@@ -39,6 +41,14 @@ class Game {
 
         while (~(exit)) {
             let key = Keyboard.keyPressed();
+            let ticks = ticks + 1;
+            if (ticks = 13 * 20) {
+                let closestWallIndex = closestWallIndex + 1;
+                if (closestWallIndex = wallsCount) {
+                    let closestWallIndex = 0;
+                }
+                let ticks = 0;
+            }
             if (key = 131) {
                 do player.erase();
                 do player.moveUp();

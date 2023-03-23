@@ -1,0 +1,39 @@
+function Snitch.new 0
+push constant 2
+call Memory.alloc 1
+pop pointer 0
+push argument 0
+pop this 0
+push argument 1
+pop this 1
+push pointer 0
+return
+function Snitch.moveLeft 0
+push argument 0
+pop pointer 0
+push this 0
+push constant 1
+sub
+pop this 0
+push constant 0
+return
+function Snitch.getX 0
+push argument 0
+pop pointer 0
+push this 0
+return
+function Snitch.getY 0
+push argument 0
+pop pointer 0
+push this 1
+return
+function Snitch.draw 1
+push argument 0
+pop pointer 0
+push constant 0
+return
+function Snitch.erase 0
+push argument 0
+pop pointer 0
+push constant 0
+return
