@@ -44,6 +44,8 @@ push argument 1
 call Wall.getX 1
 gt
 push this 1
+push constant 16
+add
 push argument 1
 call Wall.getY 1
 gt

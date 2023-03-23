@@ -2,25 +2,42 @@ class Game {
     field int width, height;
     field Player player;
 
-    field Wall wall;
+    field Array walls;
+    field int wallsCount;
+
+    field int closestWallIndex;
 
     constructor Game new() {
         let width = 512;
         let height = 256;
         let player = Player.new(1, height / 2);
-
-        let wall = Wall.new(6);
-
+        do createWalls();
+        let wallsCount = 2;
+        let closestWallIndex = 1;
         return this;
+    }
+
+    method void createWalls() {
+        var Wall wall;
+        var Wall wall1;
+        let wall = Wall.new(3, 29);
+        let wall1 = Wall.new(5, 20);
+        let walls = Array.new(2);
+        let walls[0] = wall;
+        let walls[1] = wall1;
+        return;
     }
 
     method void run() {
         var char key;
         var int lag;
         var boolean exit;
+
+        var Wall wall;
+
         let key = Keyboard.readChar();
         do player.draw();
-        do wall.draw();
+
         while (~(exit)) {
             let key = Keyboard.keyPressed();
             if (key = 131) {
@@ -33,12 +50,12 @@ class Game {
                 do player.moveDown();
                 do player.draw();
             }
+
             if (lag = 0) {
-                do wall.erase();
-                do wall.moveLeft();
-                do wall.draw();
+                do moveWalls();
             }
-            if (player.collides(wall)) {
+
+            if (player.collides((walls[closestWallIndex]))) {
                 let exit = true;
             }
             let lag = lag + 1;
@@ -46,6 +63,19 @@ class Game {
                 let lag = 0;
             }
             do Sys.wait(20);
+        }
+        return;
+    }
+
+    method void moveWalls() {
+        var int i;
+        var Wall wall;
+        while (i < wallsCount) {
+            let wall = walls[i];
+            do wall.erase();
+            do wall.moveLeft();
+            do wall.draw();
+            let i = i + 1;
         }
         return;
     }

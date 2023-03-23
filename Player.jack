@@ -23,7 +23,7 @@ class Player {
     }
 
     method boolean collides(Wall wall) {
-        return ((x + 2 > wall.getX()) & (y > wall.getY()));
+        return ((x + 2 > wall.getX()) & (y + 16 > wall.getY()));
     }
 
     method void draw() {
