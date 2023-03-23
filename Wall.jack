@@ -1,0 +1,120 @@
+class Wall {
+    field int x;
+    field int y;
+
+    field int segmentsCount;
+
+    constructor Wall new(int initialSegmentsCount) {
+        let segmentsCount = initialSegmentsCount;
+        let x = 28;
+        let y = 256 - (16 * segmentsCount);
+        return this;
+    }
+
+    method void moveLeft() {
+        let x = x - 1;
+        if (x < 0) {
+            let x = 32 + x;
+        }
+        return;
+    }
+
+    method int getX() {
+        return x;
+    }
+
+    method int getY() {
+        return y;
+    }
+
+    method void draw() {
+        var int i;
+        var int j;
+        var int segmentY;
+        var int segmentX;
+        let segmentY = y;
+        let segmentX = x;
+        while ((j < 4) & (segmentX < 32)) {
+            while (i < segmentsCount) {
+                do drawSegment(segmentX, segmentY);
+                let segmentY = segmentY + 16;
+                let i = i + 1;
+            }
+            let segmentX = segmentX + 1;
+            let segmentY = y;
+            let j = j + 1;
+            let i = 0;
+        }
+        return;
+    }
+
+    method void eraseSegment(int segmentX, int segmentY) {
+        var int memAddress;
+        let memAddress = 16384 + (segmentY * 32 + segmentX);
+        do Memory.poke(memAddress+0, 0);
+        do Memory.poke(memAddress+32, 0);
+        do Memory.poke(memAddress+64, 0);
+        do Memory.poke(memAddress+96, 0);
+        do Memory.poke(memAddress+128, 0);
+        do Memory.poke(memAddress+160, 0);
+        do Memory.poke(memAddress+192, 0);
+        do Memory.poke(memAddress+224, 0);
+        do Memory.poke(memAddress+256, 0);
+        do Memory.poke(memAddress+288, 0);
+        do Memory.poke(memAddress+320, 0);
+        do Memory.poke(memAddress+352, 0);
+        do Memory.poke(memAddress+384, 0);
+        do Memory.poke(memAddress+416, 0);
+        do Memory.poke(memAddress+448, 0);
+        do Memory.poke(memAddress+480, 0);
+        return;
+    }
+
+    method void drawSegment(int segmentX, int segmentY) {
+        var int memAddress;
+        let memAddress = 16384 + (segmentY * 32 + segmentX);
+        do Memory.poke(memAddress+0, -1);
+        do Memory.poke(memAddress+32, -32751);
+        do Memory.poke(memAddress+64, -495);
+        do Memory.poke(memAddress+96, -31201);
+        do Memory.poke(memAddress+128, -31231);
+        do Memory.poke(memAddress+160, -511);
+        do Memory.poke(memAddress+192, -32767);
+        do Memory.poke(memAddress+224, -32271);
+        do Memory.poke(memAddress+256, -32495);
+        do Memory.poke(memAddress+288, -32271);
+        do Memory.poke(memAddress+320, -32767);
+        do Memory.poke(memAddress+352, -32767);
+        do Memory.poke(memAddress+384, -255);
+        do Memory.poke(memAddress+416, -32511);
+        do Memory.poke(memAddress+448, -32509);
+        do Memory.poke(memAddress+480, -1);
+        return;
+    }
+
+    method void erase() {
+        var int i;
+        var int j;
+        var int segmentY;
+        var int segmentX;
+        let segmentY = y;
+        let segmentX = x;
+        while ((j < 4) & (segmentX < 32)) {
+            while (i < segmentsCount) {
+                do eraseSegment(segmentX, segmentY);
+                let segmentY = segmentY + 16;
+                let i = i + 1;
+            }
+            let segmentX = segmentX + 1;
+            let segmentY = y;
+            let j = j + 1;
+            let i = 0;
+        }
+        return;
+    }
+
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
+}

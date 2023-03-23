@@ -1,0 +1,126 @@
+function Game.new 0
+push constant 4
+call Memory.alloc 1
+pop pointer 0
+push constant 512
+pop this 0
+push constant 256
+pop this 1
+push constant 1
+push this 1
+push constant 2
+call Math.divide 2
+call Player.new 2
+pop this 2
+push constant 6
+call Wall.new 1
+pop this 3
+push pointer 0
+return
+function Game.run 3
+push argument 0
+pop pointer 0
+call Keyboard.readChar 0
+pop local 0
+push this 2
+call Player.draw 1
+pop temp 0
+push this 3
+call Wall.draw 1
+pop temp 0
+label WHILE_EXP0
+push local 2
+not
+not
+if-goto WHILE_END0
+call Keyboard.keyPressed 0
+pop local 0
+push local 0
+push constant 131
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push this 2
+call Player.erase 1
+pop temp 0
+push this 2
+call Player.moveUp 1
+pop temp 0
+push this 2
+call Player.draw 1
+pop temp 0
+label IF_FALSE0
+push local 0
+push constant 133
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push this 2
+call Player.erase 1
+pop temp 0
+push this 2
+call Player.moveDown 1
+pop temp 0
+push this 2
+call Player.draw 1
+pop temp 0
+label IF_FALSE1
+push local 1
+push constant 0
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push this 3
+call Wall.erase 1
+pop temp 0
+push this 3
+call Wall.moveLeft 1
+pop temp 0
+push this 3
+call Wall.draw 1
+pop temp 0
+label IF_FALSE2
+push this 2
+push this 3
+call Player.collides 2
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push constant 0
+not
+pop local 2
+label IF_FALSE3
+push local 1
+push constant 1
+add
+pop local 1
+push local 1
+push constant 20
+eq
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push constant 0
+pop local 1
+label IF_FALSE4
+push constant 20
+call Sys.wait 1
+pop temp 0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function Game.dispose 0
+push argument 0
+pop pointer 0
+push this 2
+call Player.dispose 1
+pop temp 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return

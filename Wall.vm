@@ -1,0 +1,396 @@
+function Wall.new 0
+push constant 3
+call Memory.alloc 1
+pop pointer 0
+push argument 0
+pop this 2
+push constant 28
+pop this 0
+push constant 256
+push constant 16
+push this 2
+call Math.multiply 2
+sub
+pop this 1
+push pointer 0
+return
+function Wall.moveLeft 0
+push argument 0
+pop pointer 0
+push this 0
+push constant 1
+sub
+pop this 0
+push this 0
+push constant 0
+lt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 32
+push this 0
+add
+pop this 0
+label IF_FALSE0
+push constant 0
+return
+function Wall.getX 0
+push argument 0
+pop pointer 0
+push this 0
+return
+function Wall.getY 0
+push argument 0
+pop pointer 0
+push this 1
+return
+function Wall.draw 4
+push argument 0
+pop pointer 0
+push this 1
+pop local 2
+push this 0
+pop local 3
+label WHILE_EXP0
+push local 1
+push constant 4
+lt
+push local 3
+push constant 32
+lt
+and
+not
+if-goto WHILE_END0
+label WHILE_EXP1
+push local 0
+push this 2
+lt
+not
+if-goto WHILE_END1
+push pointer 0
+push local 3
+push local 2
+call Wall.drawSegment 3
+pop temp 0
+push local 2
+push constant 16
+add
+pop local 2
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP1
+label WHILE_END1
+push local 3
+push constant 1
+add
+pop local 3
+push this 1
+pop local 2
+push local 1
+push constant 1
+add
+pop local 1
+push constant 0
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function Wall.eraseSegment 1
+push argument 0
+pop pointer 0
+push constant 16384
+push argument 2
+push constant 32
+call Math.multiply 2
+push argument 1
+add
+add
+pop local 0
+push local 0
+push constant 0
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 32
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 64
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 96
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 128
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 160
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 192
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 224
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 256
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 288
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 320
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 352
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 384
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 416
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 448
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 480
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push constant 0
+return
+function Wall.drawSegment 1
+push argument 0
+pop pointer 0
+push constant 16384
+push argument 2
+push constant 32
+call Math.multiply 2
+push argument 1
+add
+add
+pop local 0
+push local 0
+push constant 0
+add
+push constant 1
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 32
+add
+push constant 32751
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 64
+add
+push constant 495
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 96
+add
+push constant 31201
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 128
+add
+push constant 31231
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 160
+add
+push constant 511
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 192
+add
+push constant 32767
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 224
+add
+push constant 32271
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 256
+add
+push constant 32495
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 288
+add
+push constant 32271
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 320
+add
+push constant 32767
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 352
+add
+push constant 32767
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 384
+add
+push constant 255
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 416
+add
+push constant 32511
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 448
+add
+push constant 32509
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 480
+add
+push constant 1
+neg
+call Memory.poke 2
+pop temp 0
+push constant 0
+return
+function Wall.erase 4
+push argument 0
+pop pointer 0
+push this 1
+pop local 2
+push this 0
+pop local 3
+label WHILE_EXP0
+push local 1
+push constant 4
+lt
+push local 3
+push constant 32
+lt
+and
+not
+if-goto WHILE_END0
+label WHILE_EXP1
+push local 0
+push this 2
+lt
+not
+if-goto WHILE_END1
+push pointer 0
+push local 3
+push local 2
+call Wall.eraseSegment 3
+pop temp 0
+push local 2
+push constant 16
+add
+pop local 2
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP1
+label WHILE_END1
+push local 3
+push constant 1
+add
+pop local 3
+push this 1
+pop local 2
+push local 1
+push constant 1
+add
+pop local 1
+push constant 0
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function Wall.dispose 0
+push argument 0
+pop pointer 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return

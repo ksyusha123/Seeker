@@ -1,0 +1,58 @@
+class Game {
+    field int width, height;
+    field Player player;
+
+    field Wall wall;
+
+    constructor Game new() {
+        let width = 512;
+        let height = 256;
+        let player = Player.new(1, height / 2);
+
+        let wall = Wall.new(6);
+
+        return this;
+    }
+
+    method void run() {
+        var char key;
+        var int lag;
+        var boolean exit;
+        let key = Keyboard.readChar();
+        do player.draw();
+        do wall.draw();
+        while (~(exit)) {
+            let key = Keyboard.keyPressed();
+            if (key = 131) {
+                do player.erase();
+                do player.moveUp();
+                do player.draw();
+            }
+            if (key = 133) {
+                do player.erase();
+                do player.moveDown();
+                do player.draw();
+            }
+            if (lag = 0) {
+                do wall.erase();
+                do wall.moveLeft();
+                do wall.draw();
+            }
+            if (player.collides(wall)) {
+                let exit = true;
+            }
+            let lag = lag + 1;
+            if (lag = 20) {
+                let lag = 0;
+            }
+            do Sys.wait(20);
+        }
+        return;
+    }
+
+    method void dispose() {
+        do player.dispose();
+        do Memory.deAlloc(this);
+        return;
+    }
+}

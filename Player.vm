@@ -1,0 +1,278 @@
+function Player.new 0
+push constant 4
+call Memory.alloc 1
+pop pointer 0
+push argument 0
+pop this 0
+push argument 1
+pop this 1
+push constant 16
+pop this 2
+push constant 16
+pop this 3
+push pointer 0
+return
+function Player.moveUp 0
+push argument 0
+pop pointer 0
+push constant 0
+push this 1
+push constant 2
+sub
+call Math.max 2
+pop this 1
+push constant 0
+return
+function Player.moveDown 0
+push argument 0
+pop pointer 0
+push constant 240
+push this 1
+push constant 2
+add
+call Math.min 2
+pop this 1
+push constant 0
+return
+function Player.collides 0
+push argument 0
+pop pointer 0
+push this 0
+push constant 2
+add
+push argument 1
+call Wall.getX 1
+gt
+push this 1
+push argument 1
+call Wall.getY 1
+gt
+and
+return
+function Player.draw 1
+push argument 0
+pop pointer 0
+push constant 16384
+push this 1
+push constant 32
+call Math.multiply 2
+push this 0
+add
+add
+pop local 0
+push local 0
+push constant 0
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 32
+add
+push constant 16382
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 64
+add
+push constant 1
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 96
+add
+push constant 8199
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 128
+add
+push constant 9282
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 160
+add
+push constant 9282
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 192
+add
+push constant 8194
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 224
+add
+push constant 8188
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 256
+add
+push constant 1040
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 288
+add
+push constant 15710
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 320
+add
+push constant 1488
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 352
+add
+push constant 1360
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 384
+add
+push constant 1040
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 416
+add
+push constant 2032
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 448
+add
+push constant 544
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 480
+add
+push constant 1584
+call Memory.poke 2
+pop temp 0
+push constant 0
+return
+function Player.erase 1
+push argument 0
+pop pointer 0
+push constant 16384
+push this 1
+push constant 32
+call Math.multiply 2
+push this 0
+add
+add
+pop local 0
+push local 0
+push constant 0
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 32
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 64
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 96
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 128
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 160
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 192
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 224
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 256
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 288
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 320
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 352
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 384
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 416
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 448
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 480
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push constant 0
+return
+function Player.dispose 0
+push argument 0
+pop pointer 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return
