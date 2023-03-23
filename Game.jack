@@ -56,6 +56,9 @@ class Game {
 
         var Snitch closestSnitch;
 
+        do Output.moveCursor(0, 53);
+        do Output.printString("Score: 0");
+
         let key = Keyboard.readChar();
         do player.draw();
 
@@ -103,6 +106,8 @@ class Game {
             if (player.catches(closestSnitch)) {
                 do closestSnitch.wasCaught();
                 let score = score + 1;
+                do Output.moveCursor(0, 60);
+                do Output.printInt(score);
             }
 
             let lag = lag + 1;
