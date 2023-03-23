@@ -1,1 +1,3 @@
-# Seeker
+# Seeker  
+
+Catch as many snitches as possible!  
