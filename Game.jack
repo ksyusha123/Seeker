@@ -3,6 +3,7 @@ class Game {
     field Player player;
 
     field Array walls;
+    field Array snitches;
     field int wallsCount;
 
     field int wallGap;
@@ -18,6 +19,7 @@ class Game {
         let wallGap = 6;
         let wallWidth = 2;
         do createWalls();
+        do createSnitches();
         let closestWallIndex = 0;
         return this;
     }
@@ -27,6 +29,16 @@ class Game {
         let walls = Array.new(wallsCount);
         while (i < wallsCount) {
             let walls[i] = (Wall.new((i + 1) * wallGap + (i * wallWidth), 5, wallWidth));
+            let i = i + 1;
+        }
+        return;
+    }
+
+    method void createSnitches() {
+        var int i;
+        let snitches = Array.new(wallsCount);
+        while (i < wallsCount) {
+            let snitches[i] = (Snitch.new(i * wallGap + (wallGap / 2), height / 3));
             let i = i + 1;
         }
         return;
@@ -46,6 +58,7 @@ class Game {
 
         while (~(exit)) {
             let key = Keyboard.keyPressed();
+
             let ticks = ticks + 1;
             if (ticks = (wallGap + wallWidth) * 20) {
                 let closestWallIndex = closestWallIndex + 1;
@@ -54,6 +67,7 @@ class Game {
                 }
                 let ticks = 0;
             }
+
             if (key = 131) {
                 do player.erase();
                 do player.moveUp();
@@ -67,11 +81,14 @@ class Game {
 
             if (lag = 0) {
                 do moveWalls();
+                do moveSnitches();
             }
 
             if (player.collides((walls[closestWallIndex]))) {
                 let exit = true;
             }
+
+
             let lag = lag + 1;
             if (lag = 20) {
                 let lag = 0;
@@ -89,6 +106,19 @@ class Game {
             do wall.erase();
             do wall.moveLeft();
             do wall.draw();
+            let i = i + 1;
+        }
+        return;
+    }
+
+    method void moveSnitches() {
+        var int i;
+        var Snitch snitch;
+        while (i < wallsCount) {
+            let snitch = snitches[i];
+            do snitch.erase();
+            do snitch.moveLeft();
+            do snitch.draw();
             let i = i + 1;
         }
         return;

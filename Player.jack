@@ -26,9 +26,9 @@ class Player {
         return ((x + 2 > wall.getX()) & (y + 16 > wall.getY()));
     }
 
-    // method boolean collides(Snitch snitch) {
-    //     return ((x + 2 > snitch.getX()) & (y + 16 > snitch.getY()));
-    // }
+    method boolean catches(Snitch snitch) {
+        return ((x + 2 > snitch.getX()) & (y + 16 > snitch.getY()) & (y + 16 < snitch.getY() + 16));
+    }
 
     method void draw() {
         var int memAddress;

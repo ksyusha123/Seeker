@@ -51,6 +51,32 @@ call Wall.getY 1
 gt
 and
 return
+function Player.catches 0
+push argument 0
+pop pointer 0
+push this 0
+push constant 2
+add
+push argument 1
+call Snitch.getX 1
+gt
+push this 1
+push constant 16
+add
+push argument 1
+call Snitch.getY 1
+gt
+and
+push this 1
+push constant 16
+add
+push argument 1
+call Snitch.getY 1
+lt
+push constant 16
+add
+and
+return
 function Player.draw 1
 push argument 0
 pop pointer 0
