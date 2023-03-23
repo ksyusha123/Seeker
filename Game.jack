@@ -5,13 +5,18 @@ class Game {
     field Array walls;
     field int wallsCount;
 
+    field int wallGap;
+    field int wallWidth;
+
     field int closestWallIndex;
 
     constructor Game new() {
         let width = 512;
         let height = 256;
         let player = Player.new(1, height / 2);
-        let wallsCount = 3;
+        let wallsCount = 4;
+        let wallGap = 6;
+        let wallWidth = 2;
         do createWalls();
         let closestWallIndex = 0;
         return this;
@@ -21,7 +26,7 @@ class Game {
         var int i;
         let walls = Array.new(wallsCount);
         while (i < wallsCount) {
-            let walls[i] = (Wall.new(5, (i + 1) * 10));
+            let walls[i] = (Wall.new((i + 1) * wallGap + (i * wallWidth), 5, wallWidth));
             let i = i + 1;
         }
         return;
@@ -42,7 +47,7 @@ class Game {
         while (~(exit)) {
             let key = Keyboard.keyPressed();
             let ticks = ticks + 1;
-            if (ticks = 13 * 20) {
+            if (ticks = (wallGap + wallWidth) * 20) {
                 let closestWallIndex = closestWallIndex + 1;
                 if (closestWallIndex = wallsCount) {
                     let closestWallIndex = 0;

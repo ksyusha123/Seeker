@@ -1,10 +1,12 @@
 function Wall.new 0
-push constant 3
+push constant 4
 call Memory.alloc 1
 pop pointer 0
-push argument 0
-pop this 2
 push argument 1
+pop this 2
+push argument 2
+pop this 3
+push argument 0
 pop this 0
 push constant 256
 push constant 16
@@ -53,7 +55,7 @@ push this 0
 pop local 3
 label WHILE_EXP0
 push local 1
-push constant 3
+push this 3
 lt
 push local 3
 push constant 32
@@ -341,7 +343,7 @@ push this 0
 pop local 3
 label WHILE_EXP0
 push local 1
-push constant 3
+push this 3
 lt
 push local 3
 push constant 32

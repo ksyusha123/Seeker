@@ -2,12 +2,14 @@ class Wall {
     field int x;
     field int y;
 
-    field int segmentsCount;
+    field int height;
+    field int width;
 
-    constructor Wall new(int initialSegmentsCount, int startX) {
-        let segmentsCount = initialSegmentsCount;
+    constructor Wall new(int startX, int initHeight, int initWidth) {
+        let height = initHeight;
+        let width = initWidth;
         let x = startX;
-        let y = 256 - (16 * segmentsCount);
+        let y = 256 - (16 * height);
         return this;
     }
 
@@ -34,8 +36,8 @@ class Wall {
         var int segmentX;
         let segmentY = y;
         let segmentX = x;
-        while ((j < 3) & (segmentX < 32)) {
-            while (i < segmentsCount) {
+        while ((j < width) & (segmentX < 32)) {
+            while (i < height) {
                 do drawSegment(segmentX, segmentY);
                 let segmentY = segmentY + 16;
                 let i = i + 1;
@@ -99,8 +101,8 @@ class Wall {
         var int segmentX;
         let segmentY = y;
         let segmentX = x;
-        while ((j < 3) & (segmentX < 32)) {
-            while (i < segmentsCount) {
+        while ((j < width) & (segmentX < 32)) {
+            while (i < height) {
                 do eraseSegment(segmentX, segmentY);
                 let segmentY = segmentY + 16;
                 let i = i + 1;

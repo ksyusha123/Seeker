@@ -1,5 +1,5 @@
 function Game.new 0
-push constant 6
+push constant 8
 call Memory.alloc 1
 pop pointer 0
 push constant 512
@@ -12,13 +12,17 @@ push constant 2
 call Math.divide 2
 call Player.new 2
 pop this 2
-push constant 3
+push constant 4
 pop this 4
+push constant 6
+pop this 5
+push constant 2
+pop this 6
 push pointer 0
 call Game.createWalls 1
 pop temp 0
 push constant 0
-pop this 5
+pop this 7
 push pointer 0
 return
 function Game.createWalls 1
@@ -36,13 +40,18 @@ if-goto WHILE_END0
 push local 0
 push this 3
 add
-push constant 5
 push local 0
 push constant 1
 add
-push constant 10
+push this 5
 call Math.multiply 2
-call Wall.new 2
+push local 0
+push this 6
+call Math.multiply 2
+add
+push constant 5
+push this 6
+call Wall.new 3
 pop temp 0
 pop pointer 1
 push temp 0
@@ -75,25 +84,27 @@ push constant 1
 add
 pop local 3
 push local 3
-push constant 13
+push this 5
+push this 6
+add
 eq
 push constant 20
 call Math.multiply 2
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
-push this 5
+push this 7
 push constant 1
 add
-pop this 5
-push this 5
+pop this 7
+push this 7
 push this 4
 eq
 if-goto IF_TRUE1
 goto IF_FALSE1
 label IF_TRUE1
 push constant 0
-pop this 5
+pop this 7
 label IF_FALSE1
 push constant 0
 pop local 3
@@ -141,7 +152,7 @@ call Game.moveWalls 1
 pop temp 0
 label IF_FALSE4
 push this 2
-push this 5
+push this 7
 push this 3
 add
 pop pointer 1
