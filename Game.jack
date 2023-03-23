@@ -11,20 +11,19 @@ class Game {
         let width = 512;
         let height = 256;
         let player = Player.new(1, height / 2);
+        let wallsCount = 3;
         do createWalls();
-        let wallsCount = 2;
         let closestWallIndex = 1;
         return this;
     }
 
     method void createWalls() {
-        var Wall wall;
-        var Wall wall1;
-        let wall = Wall.new(3, 29);
-        let wall1 = Wall.new(5, 20);
-        let walls = Array.new(2);
-        let walls[0] = wall;
-        let walls[1] = wall1;
+        var int i;
+        let walls = Array.new(wallsCount);
+        while (i < wallsCount) {
+            let walls[i] = (Wall.new(5, (i + 1) * 10));
+            let i = i + 1;
+        }
         return;
     }
 

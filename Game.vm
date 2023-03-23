@@ -12,45 +12,47 @@ push constant 2
 call Math.divide 2
 call Player.new 2
 pop this 2
+push constant 3
+pop this 4
 push pointer 0
 call Game.createWalls 1
 pop temp 0
-push constant 2
-pop this 4
 push constant 1
 pop this 5
 push pointer 0
 return
-function Game.createWalls 2
+function Game.createWalls 1
 push argument 0
 pop pointer 0
-push constant 3
-push constant 29
-call Wall.new 2
-pop local 0
-push constant 5
-push constant 20
-call Wall.new 2
-pop local 1
-push constant 2
+push this 4
 call Array.new 1
 pop this 3
-push constant 0
-push this 3
-add
+label WHILE_EXP0
 push local 0
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-push constant 1
+push this 4
+lt
+not
+if-goto WHILE_END0
+push local 0
 push this 3
 add
-push local 1
+push constant 5
+push local 0
+push constant 1
+add
+push constant 10
+call Math.multiply 2
+call Wall.new 2
 pop temp 0
 pop pointer 1
 push temp 0
 pop that 0
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
 push constant 0
 return
 function Game.run 4
