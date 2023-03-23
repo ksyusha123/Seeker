@@ -44,7 +44,7 @@ push argument 1
 call Wall.getX 1
 gt
 push this 1
-push constant 16
+push constant 17
 add
 push argument 1
 call Wall.getY 1
@@ -61,20 +61,19 @@ push argument 1
 call Snitch.getX 1
 gt
 push this 1
-push constant 16
+push this 3
 add
 push argument 1
 call Snitch.getY 1
 gt
 and
 push this 1
-push constant 16
-add
 push argument 1
 call Snitch.getY 1
-lt
-push constant 16
+push argument 1
+call Snitch.getHeight 1
 add
+lt
 and
 return
 function Player.draw 1

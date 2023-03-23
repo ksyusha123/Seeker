@@ -10,12 +10,18 @@ class Snitch {
         let x = startX;
         let y = startY;
 
+        let height = 9;
+
         let caught = false;
         return this;
     }
 
     method void moveLeft() {
         let x = x - 1;
+        if (x < 0) {
+            let x = 32 + x;
+            let caught = false;
+        }
         return;
     }
 
@@ -27,8 +33,17 @@ class Snitch {
         return y;
     }
 
+    method int getHeight() {
+        return height;
+    }
+
     method boolean isCaught() {
         return caught;
+    }
+
+    method void wasCaught() {
+        let caught = true;
+        return;
     }
 
     method void draw() {

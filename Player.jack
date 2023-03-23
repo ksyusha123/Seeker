@@ -23,11 +23,11 @@ class Player {
     }
 
     method boolean collides(Wall wall) {
-        return ((x + 2 > wall.getX()) & (y + 16 > wall.getY()));
+        return ((x + 2 > wall.getX()) & (y + 17 > wall.getY()));
     }
 
     method boolean catches(Snitch snitch) {
-        return ((x + 2 > snitch.getX()) & (y + 16 > snitch.getY()) & (y + 16 < snitch.getY() + 16));
+        return ((x + 2 > snitch.getX()) & (y + height > snitch.getY()) & (y < (snitch.getY() + snitch.getHeight())));
     }
 
     method void draw() {

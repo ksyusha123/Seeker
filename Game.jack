@@ -1,6 +1,7 @@
 class Game {
     field int width, height;
     field Player player;
+    field int score;
 
     field Array walls;
     field Array snitches;
@@ -10,6 +11,7 @@ class Game {
     field int wallWidth;
 
     field int closestWallIndex;
+    field int closestSnitchIndex;
 
     constructor Game new() {
         let width = 512;
@@ -21,6 +23,7 @@ class Game {
         do createWalls();
         do createSnitches();
         let closestWallIndex = 0;
+        let closestSnitchIndex = 0;
         return this;
     }
 
@@ -38,7 +41,7 @@ class Game {
         var int i;
         let snitches = Array.new(wallsCount);
         while (i < wallsCount) {
-            let snitches[i] = (Snitch.new(i * wallGap + (wallGap / 2), height / 3));
+            let snitches[i] = (Snitch.new(i * wallGap + (wallGap / 2) + (i * wallWidth), height / 3));
             let i = i + 1;
         }
         return;
@@ -51,7 +54,7 @@ class Game {
 
         var int ticks;
 
-        var Wall wall;
+        var Snitch closestSnitch;
 
         let key = Keyboard.readChar();
         do player.draw();
@@ -60,6 +63,14 @@ class Game {
             let key = Keyboard.keyPressed();
 
             let ticks = ticks + 1;
+
+            if (ticks = (wallGap / 2 + 1) * 20) {
+                let closestSnitchIndex = closestSnitchIndex + 1;
+                if (closestSnitchIndex = wallsCount) {
+                    let closestSnitchIndex = 0;
+                }
+            }
+
             if (ticks = (wallGap + wallWidth) * 20) {
                 let closestWallIndex = closestWallIndex + 1;
                 if (closestWallIndex = wallsCount) {
@@ -88,6 +99,11 @@ class Game {
                 let exit = true;
             }
 
+            let closestSnitch = snitches[closestSnitchIndex];
+            if (player.catches(closestSnitch)) {
+                do closestSnitch.wasCaught();
+                let score = score + 1;
+            }
 
             let lag = lag + 1;
             if (lag = 20) {
@@ -118,7 +134,9 @@ class Game {
             let snitch = snitches[i];
             do snitch.erase();
             do snitch.moveLeft();
-            do snitch.draw();
+            if (~(snitch.isCaught())){
+                do snitch.draw();
+            }
             let i = i + 1;
         }
         return;

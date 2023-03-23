@@ -1,5 +1,5 @@
 function Game.new 0
-push constant 9
+push constant 11
 call Memory.alloc 1
 pop pointer 0
 push constant 512
@@ -13,11 +13,11 @@ call Math.divide 2
 call Player.new 2
 pop this 2
 push constant 4
-pop this 5
-push constant 6
 pop this 6
-push constant 2
+push constant 6
 pop this 7
+push constant 2
+pop this 8
 push pointer 0
 call Game.createWalls 1
 pop temp 0
@@ -25,35 +25,37 @@ push pointer 0
 call Game.createSnitches 1
 pop temp 0
 push constant 0
-pop this 8
+pop this 9
+push constant 0
+pop this 10
 push pointer 0
 return
 function Game.createWalls 1
 push argument 0
 pop pointer 0
-push this 5
+push this 6
 call Array.new 1
-pop this 3
+pop this 4
 label WHILE_EXP0
 push local 0
-push this 5
+push this 6
 lt
 not
 if-goto WHILE_END0
 push local 0
-push this 3
+push this 4
 add
 push local 0
 push constant 1
 add
-push this 6
+push this 7
 call Math.multiply 2
 push local 0
-push this 7
+push this 8
 call Math.multiply 2
 add
 push constant 5
-push this 7
+push this 8
 call Wall.new 3
 pop temp 0
 pop pointer 1
@@ -70,24 +72,28 @@ return
 function Game.createSnitches 1
 push argument 0
 pop pointer 0
-push this 5
+push this 6
 call Array.new 1
-pop this 4
+pop this 5
 label WHILE_EXP0
 push local 0
-push this 5
+push this 6
 lt
 not
 if-goto WHILE_END0
 push local 0
-push this 4
+push this 5
 add
 push local 0
-push this 6
+push this 7
 call Math.multiply 2
-push this 6
+push this 7
 push constant 2
 call Math.divide 2
+add
+push local 0
+push this 8
+call Math.multiply 2
 add
 push this 1
 push constant 3
@@ -125,8 +131,10 @@ push constant 1
 add
 pop local 3
 push local 3
-push this 6
 push this 7
+push constant 2
+call Math.divide 2
+push constant 1
 add
 eq
 push constant 20
@@ -134,28 +142,52 @@ call Math.multiply 2
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
-push this 8
+push this 10
 push constant 1
 add
-pop this 8
-push this 8
-push this 5
+pop this 10
+push this 10
+push this 6
 eq
 if-goto IF_TRUE1
 goto IF_FALSE1
 label IF_TRUE1
 push constant 0
-pop this 8
+pop this 10
 label IF_FALSE1
-push constant 0
-pop local 3
 label IF_FALSE0
-push local 0
-push constant 131
+push local 3
+push this 7
+push this 8
+add
 eq
+push constant 20
+call Math.multiply 2
 if-goto IF_TRUE2
 goto IF_FALSE2
 label IF_TRUE2
+push this 9
+push constant 1
+add
+pop this 9
+push this 9
+push this 6
+eq
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push constant 0
+pop this 9
+label IF_FALSE3
+push constant 0
+pop local 3
+label IF_FALSE2
+push local 0
+push constant 131
+eq
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
 push this 2
 call Player.erase 1
 pop temp 0
@@ -165,13 +197,13 @@ pop temp 0
 push this 2
 call Player.draw 1
 pop temp 0
-label IF_FALSE2
+label IF_FALSE4
 push local 0
 push constant 133
 eq
-if-goto IF_TRUE3
-goto IF_FALSE3
-label IF_TRUE3
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
 push this 2
 call Player.erase 1
 pop temp 0
@@ -181,34 +213,54 @@ pop temp 0
 push this 2
 call Player.draw 1
 pop temp 0
-label IF_FALSE3
+label IF_FALSE5
 push local 1
 push constant 0
 eq
-if-goto IF_TRUE4
-goto IF_FALSE4
-label IF_TRUE4
+if-goto IF_TRUE6
+goto IF_FALSE6
+label IF_TRUE6
 push pointer 0
 call Game.moveWalls 1
 pop temp 0
 push pointer 0
 call Game.moveSnitches 1
 pop temp 0
-label IF_FALSE4
+label IF_FALSE6
 push this 2
-push this 8
-push this 3
+push this 9
+push this 4
 add
 pop pointer 1
 push that 0
 call Player.collides 2
-if-goto IF_TRUE5
-goto IF_FALSE5
-label IF_TRUE5
+if-goto IF_TRUE7
+goto IF_FALSE7
+label IF_TRUE7
 push constant 0
 not
 pop local 2
-label IF_FALSE5
+label IF_FALSE7
+push this 10
+push this 5
+add
+pop pointer 1
+push that 0
+pop local 4
+push this 2
+push local 4
+call Player.catches 2
+if-goto IF_TRUE8
+goto IF_FALSE8
+label IF_TRUE8
+push local 4
+call Snitch.wasCaught 1
+pop temp 0
+push this 3
+push constant 1
+add
+pop this 3
+label IF_FALSE8
 push local 1
 push constant 1
 add
@@ -216,12 +268,12 @@ pop local 1
 push local 1
 push constant 20
 eq
-if-goto IF_TRUE6
-goto IF_FALSE6
-label IF_TRUE6
+if-goto IF_TRUE9
+goto IF_FALSE9
+label IF_TRUE9
 push constant 0
 pop local 1
-label IF_FALSE6
+label IF_FALSE9
 push constant 20
 call Sys.wait 1
 pop temp 0
@@ -234,12 +286,12 @@ push argument 0
 pop pointer 0
 label WHILE_EXP0
 push local 0
-push this 5
+push this 6
 lt
 not
 if-goto WHILE_END0
 push local 0
-push this 3
+push this 4
 add
 pop pointer 1
 push that 0
@@ -266,12 +318,12 @@ push argument 0
 pop pointer 0
 label WHILE_EXP0
 push local 0
-push this 5
+push this 6
 lt
 not
 if-goto WHILE_END0
 push local 0
-push this 4
+push this 5
 add
 pop pointer 1
 push that 0
@@ -283,8 +335,15 @@ push local 1
 call Snitch.moveLeft 1
 pop temp 0
 push local 1
+call Snitch.isCaught 1
+not
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 1
 call Snitch.draw 1
 pop temp 0
+label IF_FALSE0
 push local 0
 push constant 1
 add
