@@ -56,6 +56,10 @@ class Game {
 
         var Snitch closestSnitch;
 
+        var int seed;
+
+        // let seed = Keyboard.readInt();
+
         do Output.moveCursor(0, 53);
         do Output.printString("Score: 0");
 
@@ -65,7 +69,7 @@ class Game {
         while (~(exit)) {
             let key = Keyboard.keyPressed();
 
-            let ticks = ticks + 1;
+            let ticks = CustomMath.remainder(ticks + 1, (wallGap + wallWidth) * 20);
 
             if (ticks = (wallGap / 2 + 1) * 20) {
                 let closestSnitchIndex = closestSnitchIndex + 1;
@@ -74,12 +78,11 @@ class Game {
                 }
             }
 
-            if (ticks = (wallGap + wallWidth) * 20) {
+            if (ticks = 0) {
                 let closestWallIndex = closestWallIndex + 1;
                 if (closestWallIndex = wallsCount) {
                     let closestWallIndex = 0;
                 }
-                let ticks = 0;
             }
 
             if (key = 131) {
@@ -110,10 +113,7 @@ class Game {
                 do Output.printInt(score);
             }
 
-            let lag = lag + 1;
-            if (lag = 20) {
-                let lag = 0;
-            }
+            let lag = CustomMath.remainder(lag + 1, 20);
             do Sys.wait(20);
         }
         return;

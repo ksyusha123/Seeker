@@ -111,7 +111,7 @@ goto WHILE_EXP0
 label WHILE_END0
 push constant 0
 return
-function Game.run 5
+function Game.run 6
 push argument 0
 pop pointer 0
 push constant 0
@@ -153,6 +153,12 @@ pop local 0
 push local 3
 push constant 1
 add
+push this 7
+push this 8
+add
+push constant 20
+call Math.multiply 2
+call CustomMath.remainder 2
 pop local 3
 push local 3
 push this 7
@@ -181,12 +187,8 @@ pop this 10
 label IF_FALSE1
 label IF_FALSE0
 push local 3
-push this 7
-push this 8
-add
+push constant 0
 eq
-push constant 20
-call Math.multiply 2
 if-goto IF_TRUE2
 goto IF_FALSE2
 label IF_TRUE2
@@ -203,8 +205,6 @@ label IF_TRUE3
 push constant 0
 pop this 9
 label IF_FALSE3
-push constant 0
-pop local 3
 label IF_FALSE2
 push local 0
 push constant 131
@@ -295,16 +295,9 @@ label IF_FALSE8
 push local 1
 push constant 1
 add
-pop local 1
-push local 1
 push constant 20
-eq
-if-goto IF_TRUE9
-goto IF_FALSE9
-label IF_TRUE9
-push constant 0
+call CustomMath.remainder 2
 pop local 1
-label IF_FALSE9
 push constant 20
 call Sys.wait 1
 pop temp 0
