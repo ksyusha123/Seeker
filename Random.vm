@@ -1,0 +1,50 @@
+function Random.new 0
+push constant 3
+call Memory.alloc 1
+pop pointer 0
+push argument 0
+pop this 0
+push argument 1
+pop this 1
+push argument 2
+pop this 2
+push pointer 0
+return
+function Random.generate 4
+push argument 0
+pop pointer 0
+push this 0
+push constant 4
+call Math.multiply 2
+push this 1
+push constant 2
+call Math.multiply 2
+add
+push this 2
+add
+pop local 0
+push this 1
+pop this 2
+push this 0
+pop this 1
+push this 1
+call Convert.intToBoolean 1
+pop local 1
+push this 2
+call Convert.intToBoolean 1
+pop local 2
+push local 1
+not
+push local 2
+and
+push local 1
+push local 2
+not
+and
+or
+pop local 3
+push local 3
+call Convert.booleanToInt 1
+pop this 0
+push local 0
+return

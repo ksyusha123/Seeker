@@ -1,5 +1,5 @@
 function Game.new 0
-push constant 11
+push constant 12
 call Memory.alloc 1
 pop pointer 0
 push constant 512
@@ -18,6 +18,11 @@ push constant 6
 pop this 7
 push constant 2
 pop this 8
+push constant 0
+push constant 1
+push constant 0
+call Random.new 3
+pop this 11
 push pointer 0
 call Game.createWalls 1
 pop temp 0
@@ -30,7 +35,7 @@ push constant 0
 pop this 10
 push pointer 0
 return
-function Game.createWalls 1
+function Game.createWalls 2
 push argument 0
 pop pointer 0
 push this 6
@@ -42,6 +47,9 @@ push this 6
 lt
 not
 if-goto WHILE_END0
+push this 11
+call Random.generate 1
+pop local 1
 push local 0
 push this 4
 add
@@ -54,7 +62,9 @@ push local 0
 push this 8
 call Math.multiply 2
 add
-push constant 5
+push local 1
+push constant 2
+call Math.multiply 2
 push this 8
 call Wall.new 3
 pop temp 0
@@ -69,7 +79,7 @@ goto WHILE_EXP0
 label WHILE_END0
 push constant 0
 return
-function Game.createSnitches 1
+function Game.createSnitches 2
 push argument 0
 pop pointer 0
 push this 6
@@ -81,6 +91,9 @@ push this 6
 lt
 not
 if-goto WHILE_END0
+push this 11
+call Random.generate 1
+pop local 1
 push local 0
 push this 5
 add
@@ -96,8 +109,10 @@ push this 8
 call Math.multiply 2
 add
 push this 1
-push constant 3
+push constant 8
 call Math.divide 2
+push local 1
+call Math.multiply 2
 call Snitch.new 2
 pop temp 0
 pop pointer 1
@@ -111,7 +126,7 @@ goto WHILE_EXP0
 label WHILE_END0
 push constant 0
 return
-function Game.run 6
+function Game.run 5
 push argument 0
 pop pointer 0
 push constant 0

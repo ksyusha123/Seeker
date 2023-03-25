@@ -13,6 +13,8 @@ class Game {
     field int closestWallIndex;
     field int closestSnitchIndex;
 
+    field Random random;
+
     constructor Game new() {
         let width = 512;
         let height = 256;
@@ -20,6 +22,7 @@ class Game {
         let wallsCount = 4;
         let wallGap = 6;
         let wallWidth = 2;
+        let random = Random.new(0, 1, 0);
         do createWalls();
         do createSnitches();
         let closestWallIndex = 0;
@@ -29,9 +32,11 @@ class Game {
 
     method void createWalls() {
         var int i;
+        var int rnd;
         let walls = Array.new(wallsCount);
         while (i < wallsCount) {
-            let walls[i] = (Wall.new((i + 1) * wallGap + (i * wallWidth), 5, wallWidth));
+            let rnd = random.generate();
+            let walls[i] = (Wall.new((i + 1) * wallGap + (i * wallWidth), rnd * 2, wallWidth));
             let i = i + 1;
         }
         return;
@@ -39,9 +44,11 @@ class Game {
 
     method void createSnitches() {
         var int i;
+        var int rnd;
         let snitches = Array.new(wallsCount);
         while (i < wallsCount) {
-            let snitches[i] = (Snitch.new(i * wallGap + (wallGap / 2) + (i * wallWidth), height / 3));
+            let rnd = random.generate();
+            let snitches[i] = (Snitch.new(i * wallGap + (wallGap / 2) + (i * wallWidth), (height / 8 * rnd)));
             let i = i + 1;
         }
         return;
@@ -55,10 +62,6 @@ class Game {
         var int ticks;
 
         var Snitch closestSnitch;
-
-        var int seed;
-
-        // let seed = Keyboard.readInt();
 
         do Output.moveCursor(0, 53);
         do Output.printString("Score: 0");

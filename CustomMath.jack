@@ -2,4 +2,8 @@ class CustomMath {
     function int remainder(int number, int divisor) {
         return (number - (divisor * (number / divisor)));
     }
+
+    // function Array convertToBinary(int number) {
+
+    // }
 }

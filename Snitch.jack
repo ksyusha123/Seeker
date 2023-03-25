@@ -9,9 +9,7 @@ class Snitch {
     constructor Snitch new(int startX, int startY) {
         let x = startX;
         let y = startY;
-
         let height = 9;
-
         let caught = false;
         return this;
     }

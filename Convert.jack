@@ -1,0 +1,19 @@
+class Convert {
+    function int booleanToInt(boolean bool) {
+        if (bool) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
+
+    function boolean intToBoolean(int integer) {
+        if (integer = 0) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+}

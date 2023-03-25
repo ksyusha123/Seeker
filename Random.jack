@@ -1,0 +1,27 @@
+class Random {
+    field int x1;
+    field int x2;
+    field int x3;
+
+    constructor Random new(int initX1, int initX2, int initX3) {
+        let x1 = initX1;
+        let x2 = initX2;
+        let x3 = initX3;
+        return this;
+    }
+
+    method int generate() {
+        var int x;
+        var boolean bool1;
+        var boolean bool2;
+        var boolean bool;
+        let x = x1 * 4 + (x2 * 2) + x3;
+        let x3 = x2;
+        let x2 = x1;
+        let bool1 = Convert.intToBoolean(x2);
+        let bool2 = Convert.intToBoolean(x3);
+        let bool = ((~bool1) & bool2) | (bool1 & (~bool2));
+        let x1 = Convert.booleanToInt(bool);
+        return x;
+    }
+}
