@@ -22,11 +22,6 @@ class Game {
         let wallsCount = 4;
         let wallGap = 6;
         let wallWidth = 2;
-        let random = Random.new(0, 1, 0);
-        do createWalls();
-        do createSnitches();
-        let closestWallIndex = 0;
-        let closestSnitchIndex = 0;
         return this;
     }
 
@@ -55,12 +50,38 @@ class Game {
     }
 
     method void run() {
+        while (true) {
+            let random = Random.new(0, 1, 0);
+            do createWalls();
+            do createSnitches();
+            let closestWallIndex = 0;
+            let closestSnitchIndex = 0;
+            do runLoop();
+            do Output.moveCursor(11, 30);
+            do Output.printString("GAME OVER");
+        }
+        
+        return;
+    }
+
+    // method void eraseWallsAndSnitches() {
+    //     var int i;
+    //     var Wall wall;
+    //     var Snitch snitch;
+    //     while (i < wallsCount) {
+    //         let wall = walls[i];
+    //         let snitch = snitches[i];
+    //         do wall.erase();
+    //         do snitch.erase();
+    //     }
+    //     return;
+    // }
+
+    method void runLoop() {
         var char key;
         var int lag;
         var boolean exit;
-
         var int ticks;
-
         var Snitch closestSnitch;
 
         do Output.moveCursor(0, 53);
@@ -143,6 +164,8 @@ class Game {
 
     method void dispose() {
         do player.dispose();
+        do walls.dispose();
+        do snitches.dispose();
         do Memory.deAlloc(this);
         return;
     }

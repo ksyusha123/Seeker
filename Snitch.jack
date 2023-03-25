@@ -1,9 +1,7 @@
 class Snitch {
     field int x;
     field int y;
-
     field int height;
-
     field boolean caught;
 
     constructor Snitch new(int startX, int startY) {
@@ -85,6 +83,11 @@ class Snitch {
         do Memory.poke(memAddress+416, 0);
         do Memory.poke(memAddress+448, 0);
         do Memory.poke(memAddress+480, 0);
+        return;
+    }
+
+    method void dispose() {
+        do Memory.deAlloc(this);
         return;
     }
 }
