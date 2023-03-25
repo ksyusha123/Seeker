@@ -74,18 +74,9 @@ class Game {
 
             let ticks = CustomMath.remainder(ticks + 1, (wallGap + wallWidth) * 20);
 
-            if (ticks = (wallGap / 2 + 1) * 20) {
-                let closestSnitchIndex = closestSnitchIndex + 1;
-                if (closestSnitchIndex = wallsCount) {
-                    let closestSnitchIndex = 0;
-                }
-            }
-
             if (ticks = 0) {
-                let closestWallIndex = closestWallIndex + 1;
-                if (closestWallIndex = wallsCount) {
-                    let closestWallIndex = 0;
-                }
+                let closestWallIndex = CustomMath.remainder(closestWallIndex + 1, wallsCount);
+                let closestSnitchIndex = CustomMath.remainder(closestSnitchIndex + 1, wallsCount);
             }
 
             if (key = 131) {
