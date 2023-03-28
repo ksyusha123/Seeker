@@ -1,11 +1,11 @@
 class Game {
     field int width, height;
     field Player player;
-    field int score;
-
     field Array walls;
     field Array snitches;
+
     field int wallsCount;
+    field int snitchesCount;
 
     field int wallGap;
     field int wallWidth;
@@ -13,6 +13,7 @@ class Game {
     field int closestWallIndex;
     field int closestSnitchIndex;
 
+    field int score;
     field Random random;
 
     constructor Game new() {
@@ -20,6 +21,7 @@ class Game {
         let height = 256;
         let player = Player.new(1, height / 2);
         let wallsCount = 4;
+        let snitchesCount = 4;
         let wallGap = 6;
         let wallWidth = 2;
         return this;
@@ -40,8 +42,8 @@ class Game {
     method void createSnitches() {
         var int i;
         var int rnd;
-        let snitches = Array.new(wallsCount);
-        while (i < wallsCount) {
+        let snitches = Array.new(snitchesCount);
+        while (i < snitchesCount) {
             let rnd = random.generate();
             let snitches[i] = (Snitch.new(i * wallGap + (wallGap / 2) + (i * wallWidth), (height / 8 * rnd)));
             let i = i + 1;
@@ -79,7 +81,7 @@ class Game {
 
     method void runLoop() {
         var char key;
-        var int lag;
+        var int drawObjectsLag;
         var boolean exit;
         var int ticks;
         var Snitch closestSnitch;
@@ -111,7 +113,7 @@ class Game {
                 do player.draw();
             }
 
-            if (lag = 0) {
+            if (drawObjectsLag = 0) {
                 do moveWalls();
                 do moveSnitches();
             }
@@ -128,7 +130,7 @@ class Game {
                 do Output.printInt(score);
             }
 
-            let lag = CustomMath.remainder(lag + 1, 20);
+            let drawObjectsLag = CustomMath.remainder(drawObjectsLag + 1, 20);
             do Sys.wait(20);
         }
         return;
