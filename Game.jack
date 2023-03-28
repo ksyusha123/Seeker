@@ -52,13 +52,16 @@ class Game {
     }
 
     method void run() {
+        var boolean isFirstIteration;
+        let isFirstIteration = true;
+
         while (true) {
-            let random = Random.new(0, 1, 0);
-            do createWalls();
-            do createSnitches();
-            let closestWallIndex = 0;
-            let closestSnitchIndex = 0;
-            do runLoop();
+            do Output.moveCursor(0, 53);
+            do Output.printString("Score: 0");
+
+            do runLoop(isFirstIteration);
+            let isFirstIteration = false;
+
             do Output.moveCursor(11, 30);
             do Output.printString("GAME OVER");
         }
@@ -66,31 +69,39 @@ class Game {
         return;
     }
 
-    // method void eraseWallsAndSnitches() {
-    //     var int i;
-    //     var Wall wall;
-    //     var Snitch snitch;
-    //     while (i < wallsCount) {
-    //         let wall = walls[i];
-    //         let snitch = snitches[i];
-    //         do wall.erase();
-    //         do snitch.erase();
-    //     }
-    //     return;
-    // }
+    method void eraseWallsAndSnitches() {
+        var int i;
+        var Wall wall;
+        var Snitch snitch;
+        while (i < wallsCount) {
+            let wall = walls[i];
+            let snitch = snitches[i];
+            do wall.erase();
+            do snitch.erase();
+            let i = i + 1;
+        }
+        return;
+    }
 
-    method void runLoop() {
+    method void runLoop(boolean isFirstIteration) {
         var char key;
         var int drawObjectsLag;
         var boolean exit;
         var int ticks;
         var Snitch closestSnitch;
 
-        do Output.moveCursor(0, 53);
-        do Output.printString("Score: 0");
-
         let key = Keyboard.readChar();
         do player.draw();
+
+        if (~(isFirstIteration)) {
+            do eraseWallsAndSnitches();
+        }
+
+        let random = Random.new(0, 1, 0);
+        do createWalls();
+        do createSnitches();
+        let closestWallIndex = 0;
+        let closestSnitchIndex = 0;
 
         while (~(exit)) {
             let key = Keyboard.keyPressed();
