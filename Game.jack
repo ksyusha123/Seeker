@@ -13,7 +13,6 @@ class Game {
     field int closestWallIndex;
     field int closestSnitchIndex;
 
-    field int score;
     field Random random;
 
     constructor Game new() {
@@ -64,6 +63,8 @@ class Game {
 
             do Output.moveCursor(11, 30);
             do Output.printString("GAME OVER");
+
+            do Sys.wait(1000);
         }
         
         return;
@@ -88,6 +89,7 @@ class Game {
         var int drawObjectsLag;
         var boolean exit;
         var int ticks;
+        var int score;
         var Snitch closestSnitch;
 
         let key = Keyboard.readChar();
@@ -127,6 +129,7 @@ class Game {
             if (drawObjectsLag = 0) {
                 do moveWalls();
                 do moveSnitches();
+                do player.draw();
             }
 
             if (player.collides((walls[closestWallIndex]))) {

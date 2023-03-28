@@ -1,5 +1,5 @@
 function Game.new 0
-push constant 13
+push constant 12
 call Memory.alloc 1
 pop pointer 0
 push constant 512
@@ -34,7 +34,7 @@ push this 5
 lt
 not
 if-goto WHILE_END0
-push this 12
+push this 11
 call Random.generate 1
 pop local 1
 push local 0
@@ -78,7 +78,7 @@ push this 6
 lt
 not
 if-goto WHILE_END0
-push this 12
+push this 11
 call Random.generate 1
 pop local 1
 push local 0
@@ -180,6 +180,9 @@ push constant 82
 call String.appendChar 2
 call Output.printString 1
 pop temp 0
+push constant 1000
+call Sys.wait 1
+pop temp 0
 goto WHILE_EXP0
 label WHILE_END0
 push constant 0
@@ -219,7 +222,7 @@ goto WHILE_EXP0
 label WHILE_END0
 push constant 0
 return
-function Game.runLoop 5
+function Game.runLoop 6
 push argument 0
 pop pointer 0
 call Keyboard.readChar 0
@@ -240,7 +243,7 @@ push constant 0
 push constant 1
 push constant 0
 call Random.new 3
-pop this 12
+pop this 11
 push pointer 0
 call Game.createWalls 1
 pop temp 0
@@ -331,6 +334,9 @@ pop temp 0
 push pointer 0
 call Game.moveSnitches 1
 pop temp 0
+push this 2
+call Player.draw 1
+pop temp 0
 label IF_FALSE4
 push this 2
 push this 9
@@ -351,25 +357,25 @@ push this 4
 add
 pop pointer 1
 push that 0
-pop local 4
+pop local 5
 push this 2
-push local 4
+push local 5
 call Player.catches 2
 if-goto IF_TRUE6
 goto IF_FALSE6
 label IF_TRUE6
-push local 4
+push local 5
 call Snitch.wasCaught 1
 pop temp 0
-push this 11
+push local 4
 push constant 1
 add
-pop this 11
+pop local 4
 push constant 0
 push constant 60
 call Output.moveCursor 2
 pop temp 0
-push this 11
+push local 4
 call Output.printInt 1
 pop temp 0
 label IF_FALSE6
