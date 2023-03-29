@@ -24,4 +24,9 @@ class Random {
         let x1 = Convert.booleanToInt(bool);
         return x;
     }
+
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
 }
